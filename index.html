@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <title>Daftari Qarз — OCR Test</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #071c16;
+      color: #ffffff;
+      min-height: 100vh;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      padding: 20px 0;
+    }
+
+    .brand {
+      font-size: 14px;
+      font-weight: bold;
+      color: #08a56c;
+      letter-spacing: 2px;
+    }
+
+    h1 {
+      margin: 8px 0 5px;
+      font-size: 30px;
+    }
+
+    .subtitle {
+      color: #b7c8c2;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .card {
+      background: #0d3024;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 18px;
+      margin-top: 16px;
+    }
+
+    .button {
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.2s;
+    }
+
+    .button:active {
+      transform: scale(0.98);
+    }
+
+    .primary {
+      background: #08a56c;
+      color: white;
+    }
+
+    .secondary {
+      background: #087b53;
+      color: white;
+    }
+
+    .button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .preview {
+      width: 100%;
+      max-height: 450px;
+      object-fit: contain;
+      border-radius: 14px;
+      margin-top: 15px;
+      background: #061711;
+      display: none;
+    }
+
+    .status {
+      margin-top: 15px;
+      padding: 13px;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.2);
+      color: #baf05b;
+      font-size: 14px;
+      line-height: 1.5;
+      display: none;
+    }
+
+    .progress-wrap {
+      margin-top: 12px;
+      display: none;
+    }
+
+    .progress {
+      width: 100%;
+      height: 10px;
+      background: #071c16;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: #baf05b;
+      transition: width 0.2s;
+    }
+
+    .result-title {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 240px;
+      resize: vertical;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 15px;
+      background: #071c16;
+      color: white;
+      font-size: 16px;
+      line-height: 1.6;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #08a56c;
+    }
+
+    .small {
+      color: #9fb5ad;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 10px;
+    }
+
+    .success {
+      color: #baf05b;
+    }
+
+    .error {
+      color: #ff8d8d;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <div class="header">
+    <div class="brand">SHOHIN</div>
+    <h1>Дафтари Қарз</h1>
+    <div class="subtitle">
+      Первый тест распознавания текста с фотографии.
+    </div>
+  </div>
+
+  <div class="card">
+
+    <label for="photoInput" class="button primary">
+      📸 Сфотографировать страницу
+    </label>
+
+    <input
+      id="photoInput"
+      type="file"
+      accept="image/*"
+      capture="environment"
+    >
+
+    <img id="preview" class="preview" alt="Фото страницы">
+
+    <button
+      id="scanButton"
+      class="button secondary"
+      disabled
+    >
+      🔎 Распознать текст
+    </button>
+
+    <div id="status" class="status"></div>
+
+    <div id="progressWrap" class="progress-wrap">
+      <div class="progress">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="resultCard" class="card" style="display:none;">
+
+    <h2 class="result-title">
+      📄 Распознанный текст
+    </h2>
+
+    <textarea
+      id="resultText"
+      placeholder="Здесь появится распознанный текст..."
+    ></textarea>
+
+    <div class="small">
+      Пока приложение только показывает распознанный текст.
+      Ничего автоматически в долги не добавляется.
+    </div>
+
+  </div>
+
+</div>
+
+
+<!--
+  OCR ENGINE
+  Для первого теста библиотека загружается из CDN.
+  Позже перенесём библиотеку и языковую модель внутрь проекта,
+  чтобы сделать полноценную офлайн-версию.
+-->
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+
+<script>
+
+/* =========================================================
+   DAFTARI QARZ — OCR TEST
+   SHOHIN BRAND COLORS — НЕ МЕНЯТЬ
+   ========================================================= */
+
+const photoInput = document.getElementById("photoInput");
+const preview = document.getElementById("preview");
+const scanButton = document.getElementById("scanButton");
+
+const statusBox = document.getElementById("status");
+
+const progressWrap = document.getElementById("progressWrap");
+const progressBar = document.getElementById("progressBar");
+
+const resultCard = document.getElementById("resultCard");
+const resultText = document.getElementById("resultText");
+
+let selectedImage = null;
+
+
+/* =========================================================
+   ПОКАЗАТЬ СТАТУС
+   ========================================================= */
+
+function showStatus(message, type = "") {
+
+  statusBox.style.display = "block";
+
+  statusBox.className = "status";
+
+  if (type === "success") {
+    statusBox.classList.add("success");
+  }
+
+  if (type === "error") {
+    statusBox.classList.add("error");
+  }
+
+  statusBox.textContent = message;
+}
+
+
+/* =========================================================
+   ВЫБОР ФОТО
+   ========================================================= */
+
+photoInput.addEventListener("change", function(event) {
+
+  const file = event.target.files[0];
+
+  if (!file) {
+    return;
+  }
+
+  selectedImage = file;
+
+  const imageURL = URL.createObjectURL(file);
+
+  preview.src = imageURL;
+  preview.style.display = "block";
+
+  scanButton.disabled = false;
+
+  resultCard.style.display = "none";
+
+  showStatus(
+    "Фото загружено. Теперь нажми «Распознать текст».",
+    "success"
+  );
+
+});
+
+
+/* =========================================================
+   OCR
+   ========================================================= */
+
+scanButton.addEventListener("click", async function() {
+
+  if (!selectedImage) {
+    showStatus(
+      "Сначала сфотографируй страницу.",
+      "error"
+    );
+
+    return;
+  }
+
+  scanButton.disabled = true;
+
+  progressWrap.style.display = "block";
+
+  progressBar.style.width = "0%";
+
+  resultText.value = "";
+
+  resultCard.style.display = "block";
+
+  showStatus(
+    "Начинаю распознавание..."
+  );
+
+  try {
+
+    /*
+      Для первого теста используем русский + английский.
+
+      Если твоя страница в основном на русском,
+      это поможет проверить качество.
+
+      Для таджикского рукописного текста отдельная
+      языковая модель может потребоваться позже.
+    */
+
+    const worker = await Tesseract.createWorker(
+      ["rus", "eng"],
+      1,
+      {
+        logger: function(info) {
+
+          if (info.status) {
+
+            let message = info.status;
+
+            if (typeof info.progress === "number") {
+
+              const percent =
+                Math.round(info.progress * 100);
+
+              progressBar.style.width =
+                percent + "%";
+
+              message += " — " + percent + "%";
+            }
+
+            showStatus(message);
+          }
+
+        }
+      }
+    );
+
+
+    /*
+      Распознаём выбранную фотографию.
+    */
+
+    const result = await worker.recognize(
+      selectedImage
+    );
+
+
+    const text = result.data.text || "";
+
+
+    /*
+      Останавливаем OCR worker.
+    */
+
+    await worker.terminate();
+
+
+    progressBar.style.width = "100%";
+
+
+    if (text.trim().length === 0) {
+
+      resultText.value =
+        "Текст не удалось распознать.";
+
+      showStatus(
+        "OCR не нашёл текста. Попробуй сфотографировать страницу ближе и при хорошем освещении.",
+        "error"
+      );
+
+    } else {
+
+      resultText.value = text;
+
+      showStatus(
+        "Готово. Проверь, насколько правильно распознан твой дафтар.",
+        "success"
+      );
+
+    }
+
+  } catch (error) {
+
+    console.error(error);
+
+    showStatus(
+      "Ошибка OCR: " + error.message,
+      "error"
+    );
+
+    resultText.value =
+      "Не удалось выполнить распознавание.";
+
+  } finally {
+
+    scanButton.disabled = false;
+
+  }
+
+});
+
+
+</script>
+
+</body>
+</html>
