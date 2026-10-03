@@ -1,0 +1,5895 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>SHOHIN DAFTAR</title>
+
+<style>
+/* SHOHIN BRAND COLORS — НЕ МЕНЯТЬ */
+
+:root{
+  --bg:#071c16;
+  --card:#0d3024;
+  --green:#08a56c;
+  --green2:#087b53;
+  --lime:#baf05b;
+  --white:#ffffff;
+  --muted:#9eb5ac;
+  --red:#ff5c67;
+  --orange:#ffb84d;
+  --border:rgba(255,255,255,.09);
+  --shadow:0 10px 30px rgba(0,0,0,.22);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--white);
+  min-height:100vh;
+}
+
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.app{
+  min-height:100vh;
+  padding-bottom:80px;
+}
+
+/* SPLASH */
+
+#splash{
+  position:fixed;
+  inset:0;
+  background:var(--bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  transition:.4s;
+}
+
+.splash-box{
+  text-align:center;
+}
+
+.logo{
+  width:82px;
+  height:82px;
+  border-radius:24px;
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  font-weight:900;
+  margin:auto;
+  box-shadow:0 15px 40px rgba(8,165,108,.3);
+}
+
+.splash-title{
+  font-size:28px;
+  font-weight:900;
+  margin-top:18px;
+}
+
+.splash-sub{
+  color:var(--muted);
+  margin-top:7px;
+}
+
+.loader{
+  width:45px;
+  height:4px;
+  border-radius:20px;
+  background:var(--green);
+  margin:25px auto 0;
+  animation:load 1s infinite alternate;
+}
+
+@keyframes load{
+  from{width:30px;opacity:.4}
+  to{width:80px;opacity:1}
+}
+
+/* HEADER */
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(7,28,22,.94);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--border);
+  padding:14px 15px;
+}
+
+.header-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.brand-logo{
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  background:var(--green);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+}
+
+.brand-name{
+  font-size:18px;
+  font-weight:900;
+}
+
+.brand-small{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:2px;
+}
+
+.icon-btn{
+  width:42px;
+  height:42px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  background:var(--card);
+  color:white;
+  font-size:20px;
+}
+
+/* CONTENT */
+
+.content{
+  padding:15px;
+  max-width:900px;
+  margin:auto;
+}
+
+.section{
+  display:none;
+}
+
+.section.active{
+  display:block;
+}
+
+.section-title{
+  font-size:25px;
+  font-weight:900;
+  margin:8px 0 5px;
+}
+
+.section-subtitle{
+  color:var(--muted);
+  margin-bottom:18px;
+}
+
+/* CARDS */
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:16px;
+  margin-bottom:13px;
+  box-shadow:var(--shadow);
+}
+
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.summary-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:15px;
+}
+
+.summary-icon{
+  font-size:22px;
+}
+
+.summary-label{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:8px;
+}
+
+.summary-value{
+  font-size:23px;
+  font-weight:900;
+  margin-top:4px;
+}
+
+.green-text{
+  color:var(--lime);
+}
+
+.red-text{
+  color:var(--red);
+}
+
+/* BUTTONS */
+
+.primary-btn{
+  width:100%;
+  border:0;
+  border-radius:15px;
+  background:var(--green);
+  color:white;
+  padding:14px;
+  font-weight:800;
+  margin-top:10px;
+}
+
+.primary-btn:active{
+  transform:scale(.98);
+}
+
+.secondary-btn{
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#123c2e;
+  color:white;
+  padding:10px 12px;
+}
+
+.danger-btn{
+  border:1px solid rgba(255,92,103,.2);
+  border-radius:12px;
+  background:rgba(255,92,103,.12);
+  color:#ff7b84;
+  padding:10px 12px;
+}
+
+.edit-btn{
+  border:1px solid rgba(186,240,91,.2);
+  border-radius:12px;
+  background:rgba(186,240,91,.1);
+  color:var(--lime);
+  padding:10px 12px;
+}
+
+.pay-btn{
+  border:1px solid rgba(8,165,108,.3);
+  border-radius:12px;
+  background:rgba(8,165,108,.14);
+  color:#56e2ae;
+  padding:10px 12px;
+}
+
+/* PEOPLE */
+
+.person-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:15px;
+  margin-bottom:12px;
+}
+
+.person-top{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.avatar{
+  width:48px;
+  height:48px;
+  border-radius:16px;
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:18px;
+  flex-shrink:0;
+}
+
+.person-info{
+  flex:1;
+  min-width:0;
+}
+
+.person-name{
+  font-weight:900;
+  font-size:17px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.person-phone{
+  color:#73dcb7;
+  font-size:13px;
+  margin-top:4px;
+}
+
+.person-note{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+.person-debt{
+  text-align:right;
+}
+
+.debt-label{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.debt-value{
+  color:var(--lime);
+  font-size:19px;
+  font-weight:900;
+  margin-top:3px;
+}
+
+.person-actions{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+  margin-top:13px;
+}
+
+.person-actions button{
+  font-size:12px;
+  padding:10px 5px;
+}
+
+.overdue{
+  border-color:rgba(255,92,103,.45);
+}
+
+.overdue-label{
+  color:var(--red);
+  font-size:12px;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+/* SEARCH */
+
+.search-box{
+  position:relative;
+  margin-bottom:15px;
+}
+
+.search-box input{
+  width:100%;
+  background:var(--card);
+  color:white;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:14px 15px;
+  outline:none;
+}
+
+.search-box input:focus{
+  border-color:var(--green);
+}
+
+/* FORM */
+
+.form-group{
+  margin-bottom:13px;
+}
+
+.form-group label{
+  display:block;
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:6px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+  width:100%;
+  background:#08261d;
+  color:white;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:13px;
+  outline:none;
+}
+
+.form-group textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+  border-color:var(--green);
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+  z-index:1000;
+}
+
+.modal.active{
+  display:flex;
+}
+
+.modal-box{
+  width:100%;
+  max-width:650px;
+  max-height:92vh;
+  overflow:auto;
+  background:#0a281e;
+  border-radius:25px 25px 0 0;
+  padding:20px;
+  border:1px solid var(--border);
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.modal-title{
+  font-size:21px;
+  font-weight:900;
+}
+
+.close-btn{
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:12px;
+  background:#123c2e;
+  color:white;
+  font-size:20px;
+}
+
+/* PAYMENT HISTORY */
+
+.payment-item{
+  background:#09291f;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:12px;
+  margin-top:8px;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.payment-amount{
+  color:#56e2ae;
+  font-weight:900;
+}
+
+.payment-date{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:3px;
+}
+
+.payment-actions{
+  display:flex;
+  gap:5px;
+  align-items:center;
+}
+
+.small-btn{
+  border:0;
+  border-radius:9px;
+  padding:7px;
+  background:#153e30;
+  color:white;
+}
+
+/* LIST */
+
+.list-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:9px;
+}
+
+.list-icon{
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  background:#123c2e;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+.list-info{
+  flex:1;
+}
+
+.list-title{
+  font-weight:800;
+}
+
+.list-sub{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:3px;
+}
+
+/* DRAWER */
+
+.drawer-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  display:none;
+  z-index:500;
+}
+
+.drawer-overlay.active{
+  display:block;
+}
+
+.drawer{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:290px;
+  max-width:88%;
+  background:#09261d;
+  z-index:501;
+  transform:translateX(-100%);
+  transition:.3s;
+  overflow:auto;
+  padding:18px;
+}
+
+.drawer.active{
+  transform:translateX(0);
+}
+
+.drawer-logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:22px;
+}
+
+.drawer-section{
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  margin:18px 8px 7px;
+}
+
+.drawer-item{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border:0;
+  background:transparent;
+  color:white;
+  padding:13px 10px;
+  border-radius:13px;
+  text-align:left;
+}
+
+.drawer-item:active{
+  background:#123c2e;
+}
+
+.drawer-icon{
+  width:25px;
+  text-align:center;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  height:70px;
+  background:rgba(7,28,22,.97);
+  backdrop-filter:blur(15px);
+  border-top:1px solid var(--border);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  z-index:100;
+}
+
+.nav-btn{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  font-size:11px;
+}
+
+.nav-btn span:first-child{
+  font-size:21px;
+}
+
+.nav-btn.active{
+  color:var(--lime);
+}
+
+/* EMPTY */
+
+.empty{
+  text-align:center;
+  padding:35px 15px;
+  color:var(--muted);
+}
+
+.empty-icon{
+  font-size:45px;
+  margin-bottom:10px;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:88px;
+  transform:translateX(-50%) translateY(20px);
+  background:#123c2e;
+  border:1px solid var(--border);
+  color:white;
+  padding:12px 17px;
+  border-radius:13px;
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  z-index:3000;
+  white-space:nowrap;
+  max-width:90%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* HISTORY */
+
+.history-item{
+  border-left:3px solid var(--green);
+  padding:10px 12px;
+  margin-bottom:10px;
+  background:var(--card);
+  border-radius:0 13px 13px 0;
+}
+
+.history-title{
+  font-weight:800;
+}
+
+.history-date{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
+}
+
+@media(min-width:700px){
+
+  .bottom-nav{
+    left:50%;
+    transform:translateX(-50%);
+    max-width:650px;
+    border-radius:20px 20px 0 0;
+  }
+
+  .modal{
+    align-items:center;
+  }
+
+  .modal-box{
+    border-radius:25px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div id="splash">
+
+  <div class="splash-box">
+
+    <div class="logo">SH</div>
+
+    <div class="splash-title">
+      SHOHIN DAFTAR
+    </div>
+
+    <div class="splash-sub">
+      Ваш цифровой дафтар
+    </div>
+
+    <div class="loader"></div>
+
+  </div>
+
+</div>
+
+
+<div class="app">
+
+<header class="header">
+
+  <div class="header-row">
+
+    <div class="brand">
+
+      <button
+        class="icon-btn"
+        onclick="openDrawer()"
+      >
+        ☰
+      </button>
+
+      <div class="brand-logo">
+        SH
+      </div>
+
+      <div>
+
+        <div class="brand-name">
+          SHOHIN DAFTAR
+        </div>
+
+        <div class="brand-small">
+          Умный цифровой дафтар
+        </div>
+
+      </div>
+
+    </div>
+
+    <button
+      class="icon-btn"
+      onclick="showSection('search')"
+    >
+      ⌕
+    </button>
+
+  </div>
+
+</header>
+
+
+<main class="content">
+
+
+<!-- DEBTS -->
+
+<section
+  id="debts-section"
+  class="section active"
+>
+
+  <div class="section-title">
+    Долги
+  </div>
+
+  <div class="section-subtitle">
+    Ваши текущие долги
+  </div>
+
+
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon">
+        💰
+      </div>
+
+      <div class="summary-label">
+        Общий долг
+      </div>
+
+      <div
+        class="summary-value green-text"
+        id="totalDebt"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon">
+        👥
+      </div>
+
+      <div class="summary-label">
+        Должников
+      </div>
+
+      <div
+        class="summary-value"
+        id="totalPeople"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon">
+        💵
+      </div>
+
+      <div class="summary-label">
+        Получено оплат
+      </div>
+
+      <div
+        class="summary-value"
+        id="totalPaid"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon">
+        ⚠️
+      </div>
+
+      <div class="summary-label">
+        Просрочено
+      </div>
+
+      <div
+        class="summary-value red-text"
+        id="overdueCount"
+      >
+        0
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="primary-btn"
+    onclick="openPersonModal()"
+  >
+    ＋ Добавить должника
+  </button>
+
+
+  <div
+    style="
+      margin-top:22px;
+      font-size:18px;
+      font-weight:900;
+      margin-bottom:10px;
+    "
+  >
+    Последние должники
+  </div>
+
+
+  <div id="recentPeople"></div>
+
+</section>
+
+
+<!-- PEOPLE -->
+
+<section
+  id="people-section"
+  class="section"
+>
+
+  <div class="section-title">
+    Должники
+  </div>
+
+  <div class="section-subtitle">
+    Все люди, которые должны вам
+  </div>
+
+
+  <div class="search-box">
+
+    <input
+      id="peopleSearch"
+      type="search"
+      placeholder="🔍 Имя или телефон..."
+      oninput="renderPeople()"
+    >
+
+  </div>
+
+
+  <button
+    class="primary-btn"
+    onclick="openPersonModal()"
+  >
+    ＋ Добавить человека
+  </button>
+
+
+  <div
+    style="margin-top:18px"
+    id="peopleList"
+  ></div>
+
+</section>
+
+
+<!-- SUPPLIERS -->
+
+<section
+  id="suppliers-section"
+  class="section"
+>
+
+  <div class="section-title">
+    Поставщики
+  </div>
+
+  <div class="section-subtitle">
+    Ваши поставщики и товары
+  </div>
+
+
+  <button
+    class="primary-btn"
+    onclick="openSupplierModal()"
+  >
+    ＋ Добавить поставщика
+  </button>
+
+
+  <div
+    style="margin-top:18px"
+    id="suppliersList"
+  ></div>
+
+</section>
+
+
+<!-- NOTES -->
+
+<section
+  id="notes-section"
+  class="section"
+>
+
+  <div class="section-title">
+    Заметки
+  </div>
+
+  <div class="section-subtitle">
+    Ваши личные записи
+  </div>
+
+
+  <button
+    class="primary-btn"
+    onclick="openNoteModal()"
+  >
+    ＋ Новая заметка
+  </button>
+
+
+  <div
+    style="margin-top:18px"
+    id="notesList"
+  ></div>
+
+</section>
+
+
+<!-- INCOME -->
+
+<section
+  id="income-section"
+  class="section"
+>
+
+  <div class="section-title">
+    Доходы
+  </div>
+
+  <div class="section-subtitle">
+    Записи о доходах
+  </div>
+
+
+  <button
+    class="primary-btn"
+    onclick="openMoneyModal('income')"
+  >
+    ＋ Добавить доход
+  </button>
+
+
+  <div
+    style="margin-top:18px"
+    id="incomeList"
+  ></div>
+
+</section>
+
+
+<!-- EXPENSES -->
+
+<section
+  id="expenses-section"
+  class="section"
+>
+
+  <div class="section-title">
+    Расходы
+  </div>
+
+  <div class="section-subtitle">
+    Записи о расходах
+  </div>
+
+
+  <button
+    class="primary-btn"
+    onclick="openMoneyModal('expenses')"
+  >
+    ＋ Добавить расход
+  </button>
+
+
+  <div
+    style="margin-top:18px"
+    id="expensesList"
+  ></div>
+
+</section>
+
+
+<!-- SHOPPING -->
+
+<section
+  id="shopping-section"
+  class="section"
+>
+
+  <div class="section-title">
+    Покупки
+  </div>
+
+  <div class="section-subtitle">
+    Список покупок
+  </div>
+
+
+  <button
+    class="primary-btn"
+    onclick="addShopping()"
+  >
+    ＋ Добавить покупку
+  </button>
+
+
+  <div
+    style="margin-top:18px"
+    id="shoppingList"
+  ></div>
+
+</section>
+
+
+<!-- REMINDERS -->
+
+<section
+  id="reminders-section"
+  class="section"
+>
+
+  <div class="section-title">
+    Напоминания
+  </div>
+
+  <div class="section-subtitle">
+    Не забывайте важные дела
+  </div>
+
+
+  <button
+    class="primary-btn"
+    onclick="addReminder()"
+  >
+    ＋ Добавить напоминание
+  </button>
+
+
+  <div
+    style="margin-top:18px"
+    id="remindersList"
+  ></div>
+
+</section>
+
+
+<!-- STATISTICS -->
+
+<section
+  id="statistics-section"
+  class="section"
+>
+
+  <div class="section-title">
+    Статистика
+  </div>
+
+  <div class="section-subtitle">
+    Общая информация
+  </div>
+
+
+  <div id="statisticsContent"></div>
+
+</section>
+
+
+<!-- SEARCH -->
+
+<section
+  id="search-section"
+  class="section"
+>
+
+  <div class="section-title">
+    Поиск
+  </div>
+
+  <div class="section-subtitle">
+    Найдите человека, поставщика или заметку
+  </div>
+
+
+  <div class="search-box">
+
+    <input
+      id="globalSearch"
+      type="search"
+      placeholder="🔍 Поиск..."
+      oninput="globalSearch()"
+    >
+
+  </div>
+
+
+  <div id="searchResults"></div>
+
+</section>
+
+
+<!-- HISTORY -->
+
+<section
+  id="history-section"
+  class="section"
+>
+
+  <div class="section-title">
+    История
+  </div>
+
+  <div class="section-subtitle">
+    Все изменения в дафтаре
+  </div>
+
+
+  <div id="historyList"></div>
+
+</section>
+
+
+<!-- ARCHIVE -->
+
+<section
+  id="archive-section"
+  class="section"
+>
+
+  <div class="section-title">
+    Архив
+  </div>
+
+  <div class="section-subtitle">
+    Здесь будут архивные записи
+  </div>
+
+
+  <div class="empty">
+
+    <div class="empty-icon">
+      🗃️
+    </div>
+
+    <div>
+      Архив пока пуст
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SETTINGS -->
+
+<section
+  id="settings-section"
+  class="section"
+>
+
+  <div class="section-title">
+    Настройки
+  </div>
+
+  <div class="section-subtitle">
+    Настройки SHOHIN DAFTAR
+  </div>
+
+
+  <div class="card">
+
+    <div style="font-weight:900;font-size:17px;">
+      💾 Данные
+    </div>
+
+
+    <button
+      class="primary-btn"
+      onclick="exportBackup()"
+    >
+      📤 Скачать резервную копию
+    </button>
+
+
+    <button
+      class="secondary-btn"
+      style="width:100%;margin-top:9px;"
+      onclick="document.getElementById('backupFile').click()"
+    >
+      📥 Восстановить данные
+    </button>
+
+
+    <input
+      id="backupFile"
+      type="file"
+      accept=".json"
+      style="display:none"
+      onchange="importBackup(event)"
+    >
+
+  </div>
+
+
+  <div class="card">
+
+    <div style="font-weight:900;font-size:17px;">
+      🗑 Очистка
+    </div>
+
+    <div
+      style="
+        color:var(--muted);
+        font-size:13px;
+        margin-top:7px;
+      "
+    >
+      Удаляет все данные с этого устройства.
+    </div>
+
+
+    <button
+      class="danger-btn"
+      style="width:100%;margin-top:12px;"
+      onclick="clearAllData()"
+    >
+      Удалить все данные
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- BACKUP -->
+
+<section
+  id="backup-section"
+  class="section"
+>
+
+  <div class="section-title">
+    Резервная копия
+  </div>
+
+  <div class="section-subtitle">
+    Сохраните данные, чтобы не потерять их
+  </div>
+
+
+  <div class="card">
+
+    <div style="font-size:40px;text-align:center;">
+      💾
+    </div>
+
+
+    <div style="text-align:center;margin-top:10px;">
+      Все ваши данные находятся на этом устройстве.
+    </div>
+
+
+    <button
+      class="primary-btn"
+      onclick="exportBackup()"
+    >
+      📤 Скачать backup
+    </button>
+
+
+    <button
+      class="secondary-btn"
+      style="width:100%;margin-top:10px;"
+      onclick="document.getElementById('backupFile2').click()"
+    >
+      📥 Восстановить backup
+    </button>
+
+
+    <input
+      id="backupFile2"
+      type="file"
+      accept=".json"
+      style="display:none"
+      onchange="importBackup(event)"
+    >
+
+  </div>
+
+</section>
+
+
+<!-- SCANNER -->
+
+<section
+  id="scanner-section"
+  class="section"
+>
+
+  <div class="section-title">
+    Сканер
+  </div>
+
+  <div class="section-subtitle">
+    Выберите фотографию для дальнейшего распознавания
+  </div>
+
+
+  <div class="card">
+
+    <input
+      id="scannerInput"
+      type="file"
+      accept="image/*"
+      capture="environment"
+      style="width:100%"
+    >
+
+
+    <button
+      class="primary-btn"
+      onclick="scanImage()"
+    >
+      📷 Обработать фото
+    </button>
+
+
+    <div
+      id="scannerResult"
+      style="margin-top:15px;color:var(--muted);"
+    ></div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+  <button
+    class="nav-btn active"
+    data-section="debts"
+    onclick="showSection('debts')"
+  >
+    <span>💰</span>
+    <span>Долги</span>
+  </button>
+
+
+  <button
+    class="nav-btn"
+    data-section="people"
+    onclick="showSection('people')"
+  >
+    <span>👥</span>
+    <span>Люди</span>
+  </button>
+
+
+  <button
+    class="nav-btn"
+    data-section="notes"
+    onclick="showSection('notes')"
+  >
+    <span>📝</span>
+    <span>Заметки</span>
+  </button>
+
+
+  <button
+    class="nav-btn"
+    data-section="statistics"
+    onclick="showSection('statistics')"
+  >
+    <span>📊</span>
+    <span>Статистика</span>
+  </button>
+
+</nav>
+
+</div>
+
+
+<!-- DRAWER -->
+
+<div
+  class="drawer-overlay"
+  id="drawerOverlay"
+  onclick="closeDrawer()"
+></div>
+
+
+<aside
+  class="drawer"
+  id="drawer"
+>
+
+  <div class="drawer-logo">
+
+    <div class="brand-logo">
+      SH
+    </div>
+
+    <div>
+
+      <div style="font-weight:900;">
+        SHOHIN DAFTAR
+      </div>
+
+      <div
+        style="
+          color:var(--muted);
+          font-size:11px;
+        "
+      >
+        Ваш цифровой дафтар
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="drawer-section">
+    Основное
+  </div>
+
+
+  <button
+    class="drawer-item"
+    onclick="drawerGo('debts')"
+  >
+    <span class="drawer-icon">💰</span>
+    Долги
+  </button>
+
+
+  <button
+    class="drawer-item"
+    onclick="drawerGo('people')"
+  >
+    <span class="drawer-icon">👥</span>
+    Люди
+  </button>
+
+
+  <button
+    class="drawer-item"
+    onclick="drawerGo('suppliers')"
+  >
+    <span class="drawer-icon">🚚</span>
+    Поставщики
+  </button>
+
+
+  <button
+    class="drawer-item"
+    onclick="drawerGo('notes')"
+  >
+    <span class="drawer-icon">📝</span>
+    Заметки
+  </button>
+
+
+  <div class="drawer-section">
+    Финансы
+  </div>
+
+
+  <button
+    class="drawer-item"
+    onclick="drawerGo('income')"
+  >
+    <span class="drawer-icon">📈</span>
+    Доходы
+  </button>
+
+
+  <button
+    class="drawer-item"
+    onclick="drawerGo('expenses')"
+  >
+    <span class="drawer-icon">📉</span>
+    Расходы
+  </button>
+
+
+  <button
+    class="drawer-item"
+    onclick="drawerGo('shopping')"
+  >
+    <span class="drawer-icon">🛒</span>
+    Покупки
+  </button>
+
+
+  <div class="drawer-section">
+    Инструменты
+  </div>
+
+
+  <button
+    class="drawer-item"
+    onclick="drawerGo('reminders')"
+  >
+    <span class="drawer-icon">🔔</span>
+    Напоминания
+  </button>
+
+
+  <button
+    class="drawer-item"
+    onclick="drawerGo('statistics')"
+  >
+    <span class="drawer-icon">📊</span>
+    Статистика
+  </button>
+
+
+  <button
+    class="drawer-item"
+    onclick="drawerGo('search')"
+  >
+    <span class="drawer-icon">🔍</span>
+    Поиск
+  </button>
+
+
+  <button
+    class="drawer-item"
+    onclick="drawerGo('history')"
+  >
+    <span class="drawer-icon">📜</span>
+    История
+  </button>
+
+
+  <button
+    class="drawer-item"
+    onclick="drawerGo('scanner')"
+  >
+    <span class="drawer-icon">📷</span>
+    Сканер
+  </button>
+
+
+  <div class="drawer-section">
+    Система
+  </div>
+
+
+  <button
+    class="drawer-item"
+    onclick="drawerGo('archive')"
+  >
+    <span class="drawer-icon">🗃️</span>
+    Архив
+  </button>
+
+
+  <button
+    class="drawer-item"
+    onclick="drawerGo('backup')"
+  >
+    <span class="drawer-icon">💾</span>
+    Резервная копия
+  </button>
+
+
+  <button
+    class="drawer-item"
+    onclick="drawerGo('settings')"
+  >
+    <span class="drawer-icon">⚙️</span>
+    Настройки
+  </button>
+
+</aside>
+
+
+<!-- PERSON MODAL -->
+
+<div
+  class="modal"
+  id="personModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <div
+        class="modal-title"
+        id="personModalTitle"
+      >
+        Добавить человека
+      </div>
+
+
+      <button
+        class="close-btn"
+        onclick="closeModal('personModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        👤 Имя должника
+      </label>
+
+      <input
+        id="personName"
+        type="text"
+        placeholder="Например: Али"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        📞 Номер телефона
+      </label>
+
+      <input
+        id="personPhone"
+        type="tel"
+        placeholder="+992..."
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        💰 Долг
+      </label>
+
+      <input
+        id="personDebt"
+        type="number"
+        min="0"
+        step="0.01"
+        placeholder="0"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        📆 Срок возврата
+      </label>
+
+      <input
+        id="personDueDate"
+        type="date"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        📝 Заметка
+      </label>
+
+      <textarea
+        id="personNote"
+        placeholder="Дополнительная информация..."
+      ></textarea>
+
+    </div>
+
+
+    <button
+      class="primary-btn"
+      onclick="savePerson()"
+    >
+      💾 Сохранить
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- PAYMENT MODAL -->
+
+<div
+  class="modal"
+  id="paymentModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <div class="modal-title">
+        Внести оплату
+      </div>
+
+
+      <button
+        class="close-btn"
+        onclick="closeModal('paymentModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      id="paymentPersonInfo"
+      class="card"
+    ></div>
+
+
+    <div class="form-group">
+
+      <label>
+        💵 Сумма оплаты
+      </label>
+
+      <input
+        id="paymentAmount"
+        type="number"
+        min="0.01"
+        step="0.01"
+        placeholder="Например: 100"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        📝 Комментарий
+      </label>
+
+      <textarea
+        id="paymentNote"
+        placeholder="Например: частичная оплата"
+      ></textarea>
+
+    </div>
+
+
+    <button
+      class="primary-btn"
+      onclick="savePayment()"
+    >
+      💵 Внести оплату
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- PERSON DETAIL -->
+
+<div
+  class="modal"
+  id="personDetailModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <div class="modal-title">
+        Карточка человека
+      </div>
+
+
+      <button
+        class="close-btn"
+        onclick="closeModal('personDetailModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div id="personDetailContent"></div>
+
+  </div>
+
+</div>
+
+
+<!-- SUPPLIER -->
+
+<div
+  class="modal"
+  id="supplierModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <div class="modal-title">
+        Добавить поставщика
+      </div>
+
+
+      <button
+        class="close-btn"
+        onclick="closeModal('supplierModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        🚚 Название
+      </label>
+
+      <input
+        id="supplierName"
+        type="text"
+        placeholder="Название поставщика"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        📞 Телефон
+      </label>
+
+      <input
+        id="supplierPhone"
+        type="tel"
+        placeholder="+992..."
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        📦 Товар
+      </label>
+
+      <input
+        id="supplierProduct"
+        type="text"
+        placeholder="Товар"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        💰 Сумма
+      </label>
+
+      <input
+        id="supplierAmount"
+        type="number"
+        min="0"
+        step="0.01"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        📝 Заметка
+      </label>
+
+      <textarea id="supplierNote"></textarea>
+
+    </div>
+
+
+    <button
+      class="primary-btn"
+      onclick="saveSupplier()"
+    >
+      💾 Сохранить
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- NOTE -->
+
+<div
+  class="modal"
+  id="noteModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <div class="modal-title">
+        Новая заметка
+      </div>
+
+
+      <button
+        class="close-btn"
+        onclick="closeModal('noteModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Заголовок
+      </label>
+
+      <input
+        id="noteTitle"
+        type="text"
+        placeholder="Название заметки"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Текст
+      </label>
+
+      <textarea
+        id="noteText"
+        placeholder="Напишите заметку..."
+      ></textarea>
+
+    </div>
+
+
+    <button
+      class="primary-btn"
+      onclick="saveNote()"
+    >
+      💾 Сохранить
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- MONEY -->
+
+<div
+  class="modal"
+  id="moneyModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <div
+        class="modal-title"
+        id="moneyModalTitle"
+      >
+        Добавить
+      </div>
+
+
+      <button
+        class="close-btn"
+        onclick="closeModal('moneyModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        💰 Сумма
+      </label>
+
+      <input
+        id="moneyAmount"
+        type="number"
+        min="0"
+        step="0.01"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        📝 Описание
+      </label>
+
+      <textarea id="moneyNote"></textarea>
+
+    </div>
+
+
+    <button
+      class="primary-btn"
+      onclick="saveMoney()"
+    >
+      💾 Сохранить
+    </button>
+
+  </div>
+
+</div>
+
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+
+<script>
+
+/* =========================================
+   SHOHIN DAFTAR
+   Все данные сохраняются в localStorage
+========================================= */
+
+const STORAGE_KEY = "shohin_daftar_data";
+
+
+let data = {
+
+  people: [],
+
+  suppliers: [],
+
+  notes: [],
+
+  income: [],
+
+  expenses: [],
+
+  shopping: [],
+
+  reminders: [],
+
+  history: []
+
+};
+
+
+let editingPersonId = null;
+
+let currentPaymentPersonId = null;
+
+let currentMoneyType = null;
+
+
+/* =========================================
+   START
+========================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    loadData();
+
+    setTimeout(
+      () => {
+
+        const splash =
+          document.getElementById("splash");
+
+        if(splash){
+
+          splash.style.opacity = "0";
+
+          setTimeout(
+            () => {
+
+              splash.style.display = "none";
+
+            },
+            400
+          );
+
+        }
+
+      },
+      700
+    );
+
+    renderAll();
+
+  }
+);
+
+
+/* =========================================
+   LOAD DATA
+========================================= */
+
+function loadData(){
+
+  try{
+
+    const saved =
+      localStorage.getItem(STORAGE_KEY);
+
+
+    if(saved){
+
+      const parsed =
+        JSON.parse(saved);
+
+
+      data = {
+
+        people:
+          Array.isArray(parsed.people)
+          ? parsed.people
+          : [],
+
+        suppliers:
+          Array.isArray(parsed.suppliers)
+          ? parsed.suppliers
+          : [],
+
+        notes:
+          Array.isArray(parsed.notes)
+          ? parsed.notes
+          : [],
+
+        income:
+          Array.isArray(parsed.income)
+          ? parsed.income
+          : [],
+
+        expenses:
+          Array.isArray(parsed.expenses)
+          ? parsed.expenses
+          : [],
+
+        shopping:
+          Array.isArray(parsed.shopping)
+          ? parsed.shopping
+          : [],
+
+        reminders:
+          Array.isArray(parsed.reminders)
+          ? parsed.reminders
+          : [],
+
+        history:
+          Array.isArray(parsed.history)
+          ? parsed.history
+          : []
+
+      };
+
+    }
+
+
+    /*
+      Поддержка старых записей.
+    */
+
+    data.people.forEach(
+      person => {
+
+        if(!person.phone){
+          person.phone = "";
+        }
+
+        if(!Array.isArray(person.payments)){
+          person.payments = [];
+        }
+
+        if(!person.dueDate){
+          person.dueDate = "";
+        }
+
+      }
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast("Ошибка чтения данных");
+
+  }
+
+}
+
+
+/* =========================================
+   SAVE
+========================================= */
+
+function saveData(){
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(data)
+  );
+
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+function showSection(section){
+
+  document
+    .querySelectorAll(".section")
+    .forEach(
+      element => {
+        element.classList.remove("active");
+      }
+    );
+
+
+  const target =
+    document.getElementById(
+      section + "-section"
+    );
+
+
+  if(target){
+    target.classList.add("active");
+  }
+
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(
+      button => {
+
+        button.classList.toggle(
+          "active",
+          button.dataset.section === section
+        );
+
+      }
+    );
+
+
+  closeDrawer();
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+
+  if(section === "debts"){
+    renderDebts();
+  }
+
+  if(section === "people"){
+    renderPeople();
+  }
+
+  if(section === "statistics"){
+    renderStatistics();
+  }
+
+  if(section === "history"){
+    renderHistory();
+  }
+
+  if(section === "suppliers"){
+    renderSuppliers();
+  }
+
+  if(section === "notes"){
+    renderNotes();
+  }
+
+}
+
+
+function drawerGo(section){
+
+  showSection(section);
+
+}
+
+
+/* =========================================
+   DRAWER
+========================================= */
+
+function openDrawer(){
+
+  document
+    .getElementById("drawer")
+    .classList.add("active");
+
+  document
+    .getElementById("drawerOverlay")
+    .classList.add("active");
+
+}
+
+
+function closeDrawer(){
+
+  document
+    .getElementById("drawer")
+    .classList.remove("active");
+
+  document
+    .getElementById("drawerOverlay")
+    .classList.remove("active");
+
+}
+
+
+/* =========================================
+   MODALS
+========================================= */
+
+function openModal(id){
+
+  document
+    .getElementById(id)
+    .classList.add("active");
+
+}
+
+
+function closeModal(id){
+
+  document
+    .getElementById(id)
+    .classList.remove("active");
+
+}
+
+
+/* =========================================
+   PEOPLE
+========================================= */
+
+function openPersonModal(personId = null){
+
+  editingPersonId = personId;
+
+
+  document.getElementById("personName").value = "";
+
+  document.getElementById("personPhone").value = "";
+
+  document.getElementById("personDebt").value = "";
+
+  document.getElementById("personDueDate").value = "";
+
+  document.getElementById("personNote").value = "";
+
+
+  if(personId !== null){
+
+    const person =
+      data.people.find(
+        p =>
+          String(p.id) ===
+          String(personId)
+      );
+
+
+    if(!person){
+
+      showToast("Человек не найден");
+
+      return;
+
+    }
+
+
+    document.getElementById(
+      "personModalTitle"
+    ).textContent =
+      "Изменить человека";
+
+
+    document.getElementById(
+      "personName"
+    ).value =
+      person.name || "";
+
+
+    document.getElementById(
+      "personPhone"
+    ).value =
+      person.phone || "";
+
+
+    document.getElementById(
+      "personDebt"
+    ).value =
+      person.debt || 0;
+
+
+    document.getElementById(
+      "personDueDate"
+    ).value =
+      person.dueDate || "";
+
+
+    document.getElementById(
+      "personNote"
+    ).value =
+      person.note || "";
+
+
+  }else{
+
+    document.getElementById(
+      "personModalTitle"
+    ).textContent =
+      "Добавить человека";
+
+  }
+
+
+  openModal("personModal");
+
+}
+
+
+function savePerson(){
+
+  const name =
+    document
+      .getElementById("personName")
+      .value
+      .trim();
+
+
+  const phone =
+    document
+      .getElementById("personPhone")
+      .value
+      .trim();
+
+
+  const debt =
+    Number(
+      document
+        .getElementById("personDebt")
+        .value
+    ) || 0;
+
+
+  const dueDate =
+    document
+      .getElementById("personDueDate")
+      .value;
+
+
+  const note =
+    document
+      .getElementById("personNote")
+      .value
+      .trim();
+
+
+  if(!name){
+
+    showToast("Введите имя");
+
+    return;
+
+  }
+
+
+  if(debt < 0){
+
+    showToast(
+      "Долг не может быть отрицательным"
+    );
+
+    return;
+
+  }
+
+
+  /* EDIT */
+
+  if(editingPersonId !== null){
+
+    const person =
+      data.people.find(
+        p =>
+          String(p.id) ===
+          String(editingPersonId)
+      );
+
+
+    if(!person){
+
+      showToast("Человек не найден");
+
+      return;
+
+    }
+
+
+    const oldDebt =
+      Number(person.debt) || 0;
+
+
+    person.name = name;
+
+    person.phone = phone;
+
+    person.debt = debt;
+
+    person.dueDate = dueDate;
+
+    person.note = note;
+
+    person.updatedAt = dateNow();
+
+
+    addHistory(
+      "Изменён должник",
+      `${name}: долг ${formatMoney(oldDebt)} → ${formatMoney(debt)}`
+    );
+
+
+    showToast(
+      "Данные изменены"
+    );
+
+
+  }
+
+  /* ADD */
+
+  else{
+
+    const person = {
+
+      id: Date.now(),
+
+      name,
+
+      phone,
+
+      debt,
+
+      initialDebt: debt,
+
+      note,
+
+      dueDate,
+
+      payments: [],
+
+      createdAt: dateNow(),
+
+      updatedAt: dateNow()
+
+    };
+
+
+    data.people.unshift(person);
+
+
+    addHistory(
+      "Добавлен должник",
+      `${name}: ${formatMoney(debt)}`
+    );
+
+
+    showToast(
+      "Человек добавлен"
+    );
+
+  }
+
+
+  saveData();
+
+  closeModal("personModal");
+
+  renderAll();
+
+  editingPersonId = null;
+
+}
+
+
+function editPerson(id){
+
+  openPersonModal(id);
+
+}
+
+
+function deletePerson(id){
+
+  const person =
+    data.people.find(
+      p =>
+        String(p.id) ===
+        String(id)
+    );
+
+
+  if(!person){
+    return;
+  }
+
+
+  const ok =
+    confirm(
+      `Удалить "${person.name}"?\n\nЭто удалит его долг и историю оплат.`
+    );
+
+
+  if(!ok){
+    return;
+  }
+
+
+  data.people =
+    data.people.filter(
+      p =>
+        String(p.id) !==
+        String(id)
+    );
+
+
+  addHistory(
+    "Удалён должник",
+    person.name
+  );
+
+
+  saveData();
+
+  renderAll();
+
+  showToast(
+    "Человек удалён"
+  );
+
+}
+
+
+/* =========================================
+   PAYMENT
+========================================= */
+
+function openPaymentModal(id){
+
+  const person =
+    data.people.find(
+      p =>
+        String(p.id) ===
+        String(id)
+    );
+
+
+  if(!person){
+    return;
+  }
+
+
+  currentPaymentPersonId = id;
+
+
+  document.getElementById(
+    "paymentAmount"
+  ).value = "";
+
+
+  document.getElementById(
+    "paymentNote"
+  ).value = "";
+
+
+  document.getElementById(
+    "paymentPersonInfo"
+  ).innerHTML = `
+
+    <div
+      style="
+        font-size:18px;
+        font-weight:900;
+      "
+    >
+      ${escapeHTML(person.name)}
+    </div>
+
+    <div
+      style="
+        color:var(--muted);
+        margin-top:6px;
+      "
+    >
+      Осталось:
+
+      <strong
+        style="color:var(--lime)"
+      >
+        ${formatMoney(person.debt)}
+      </strong>
+    </div>
+
+  `;
+
+
+  openModal(
+    "paymentModal"
+  );
+
+}
+
+
+function savePayment(){
+
+  const person =
+    data.people.find(
+      p =>
+        String(p.id) ===
+        String(currentPaymentPersonId)
+    );
+
+
+  if(!person){
+
+    showToast(
+      "Человек не найден"
+    );
+
+    return;
+
+  }
+
+
+  const amount =
+    Number(
+      document
+        .getElementById("paymentAmount")
+        .value
+    ) || 0;
+
+
+  const note =
+    document
+      .getElementById("paymentNote")
+      .value
+      .trim();
+
+
+  if(amount <= 0){
+
+    showToast(
+      "Введите сумму"
+    );
+
+    return;
+
+  }
+
+
+  if(amount > Number(person.debt)){
+
+    showToast(
+      "Оплата больше текущего долга"
+    );
+
+    return;
+
+  }
+
+
+  const payment = {
+
+    id: Date.now(),
+
+    amount,
+
+    note,
+
+    date: dateNow()
+
+  };
+
+
+  if(!Array.isArray(person.payments)){
+
+    person.payments = [];
+
+  }
+
+
+  person.payments.unshift(
+    payment
+  );
+
+
+  person.debt =
+    Math.max(
+      0,
+      Number(person.debt) -
+      amount
+    );
+
+
+  person.updatedAt =
+    dateNow();
+
+
+  addHistory(
+    "Получена оплата",
+    `${person.name}: +${formatMoney(amount)}`
+  );
+
+
+  saveData();
+
+  closeModal(
+    "paymentModal"
+  );
+
+  renderAll();
+
+
+  showToast(
+    "Оплата сохранена"
+  );
+
+
+  currentPaymentPersonId =
+    null;
+
+}
+
+
+/* =========================================
+   UNDO PAYMENT
+========================================= */
+
+function undoPayment(
+  personId,
+  paymentId
+){
+
+  const person =
+    data.people.find(
+      p =>
+        String(p.id) ===
+        String(personId)
+    );
+
+
+  if(!person){
+    return;
+  }
+
+
+  if(!Array.isArray(person.payments)){
+    person.payments = [];
+  }
+
+
+  const index =
+    person.payments.findIndex(
+      p =>
+        String(p.id) ===
+        String(paymentId)
+    );
+
+
+  if(index === -1){
+    return;
+  }
+
+
+  const payment =
+    person.payments[index];
+
+
+  const ok =
+    confirm(
+      `Отменить оплату ${formatMoney(payment.amount)}?`
+    );
+
+
+  if(!ok){
+    return;
+  }
+
+
+  person.debt =
+    Number(person.debt) +
+    Number(payment.amount);
+
+
+  person.payments.splice(
+    index,
+    1
+  );
+
+
+  person.updatedAt =
+    dateNow();
+
+
+  addHistory(
+    "Отменена оплата",
+    `${person.name}: ${formatMoney(payment.amount)}`
+  );
+
+
+  saveData();
+
+  renderAll();
+
+
+  closeModal(
+    "personDetailModal"
+  );
+
+
+  showToast(
+    "Оплата отменена"
+  );
+
+}
+
+
+/* =========================================
+   PERSON DETAIL
+========================================= */
+
+function openPersonDetail(id){
+
+  const person =
+    data.people.find(
+      p =>
+        String(p.id) ===
+        String(id)
+    );
+
+
+  if(!person){
+    return;
+  }
+
+
+  if(!Array.isArray(person.payments)){
+
+    person.payments = [];
+
+  }
+
+
+  const totalPaid =
+    person.payments.reduce(
+      (sum,payment) =>
+        sum +
+        Number(
+          payment.amount || 0
+        ),
+      0
+    );
+
+
+  const overdue =
+    isOverdue(person);
+
+
+  let paymentsHTML = "";
+
+
+  if(person.payments.length === 0){
+
+    paymentsHTML = `
+
+      <div
+        class="empty"
+        style="padding:20px 0"
+      >
+        Оплат пока нет
+      </div>
+
+    `;
+
+  }else{
+
+    paymentsHTML =
+      person.payments
+        .map(
+          payment => `
+
+      <div class="payment-item">
+
+        <div>
+
+          <div class="payment-amount">
+            +${formatMoney(payment.amount)}
+          </div>
+
+          <div class="payment-date">
+            ${formatDate(payment.date)}
+          </div>
+
+          ${
+            payment.note
+            ? `
+              <div
+                style="
+                  font-size:12px;
+                  color:var(--muted);
+                  margin-top:4px;
+                "
+              >
+                ${escapeHTML(payment.note)}
+              </div>
+            `
+            : ""
+          }
+
+        </div>
+
+
+        <div class="payment-actions">
+
+          <button
+            class="small-btn"
+            onclick="
+              undoPayment(
+                '${person.id}',
+                '${payment.id}'
+              )
+            "
+          >
+            ↩️
+          </button>
+
+        </div>
+
+      </div>
+
+    `
+        )
+        .join("");
+
+  }
+
+
+  document.getElementById(
+    "personDetailContent"
+  ).innerHTML = `
+
+    <div class="person-card">
+
+      <div class="person-top">
+
+        <div class="avatar">
+          ${getInitials(person.name)}
+        </div>
+
+
+        <div class="person-info">
+
+          <div class="person-name">
+            ${escapeHTML(person.name)}
+          </div>
+
+          ${
+            person.phone
+            ? `
+              <div class="person-phone">
+                📞 ${escapeHTML(person.phone)}
+              </div>
+            `
+            : ""
+          }
+
+        </div>
+
+      </div>
+
+
+      <div style="margin-top:17px;">
+
+        <div class="summary-grid">
+
+          <div class="summary-card">
+
+            <div class="summary-label">
+              Осталось
+            </div>
+
+            <div
+              class="summary-value green-text"
+            >
+              ${formatMoney(person.debt)}
+            </div>
+
+          </div>
+
+
+          <div class="summary-card">
+
+            <div class="summary-label">
+              Оплачено
+            </div>
+
+            <div class="summary-value">
+              ${formatMoney(totalPaid)}
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      ${
+        person.dueDate
+        ? `
+
+          <div
+            style="
+              margin-top:14px;
+              color:var(--muted);
+            "
+          >
+            📆 Срок:
+            ${formatDateOnly(person.dueDate)}
+          </div>
+
+          ${
+            overdue &&
+            Number(person.debt) > 0
+            ? `
+              <div class="overdue-label">
+                ⚠️ Срок возврата просрочен
+              </div>
+            `
+            : ""
+          }
+
+        `
+        : ""
+      }
+
+
+      ${
+        person.note
+        ? `
+
+          <div
+            style="
+              margin-top:14px;
+              color:var(--muted);
+            "
+          >
+            📝 ${escapeHTML(person.note)}
+          </div>
+
+        `
+        : ""
+      }
+
+
+      <button
+        class="primary-btn"
+        onclick="
+          closeModal('personDetailModal');
+          openPaymentModal('${person.id}')
+        "
+      >
+        💵 Внести оплату
+      </button>
+
+
+      <button
+        class="edit-btn"
+        style="
+          width:100%;
+          margin-top:8px;
+        "
+        onclick="
+          closeModal('personDetailModal');
+          openPersonModal('${person.id}')
+        "
+      >
+        ✏️ Изменить
+      </button>
+
+    </div>
+
+
+    <div
+      style="
+        font-size:18px;
+        font-weight:900;
+        margin-top:20px;
+      "
+    >
+      📜 История оплат
+    </div>
+
+
+    <div style="margin-top:8px;">
+      ${paymentsHTML}
+    </div>
+
+  `;
+
+
+  openModal(
+    "personDetailModal"
+  );
+
+}
+
+
+/* =========================================
+   RENDER PEOPLE
+========================================= */
+
+function renderPeople(){
+
+  const container =
+    document.getElementById(
+      "peopleList"
+    );
+
+
+  if(!container){
+    return;
+  }
+
+
+  const search =
+    (
+      document.getElementById(
+        "peopleSearch"
+      )?.value || ""
+    )
+      .trim()
+      .toLowerCase();
+
+
+  const people =
+    data.people.filter(
+      person => {
+
+        if(!search){
+          return true;
+        }
+
+
+        return (
+
+          String(
+            person.name || ""
+          )
+            .toLowerCase()
+            .includes(search)
+
+          ||
+
+          String(
+            person.phone || ""
+          )
+            .toLowerCase()
+            .includes(search)
+
+          ||
+
+          String(
+            person.note || ""
+          )
+            .toLowerCase()
+            .includes(search)
+
+        );
+
+      }
+    );
+
+
+  if(people.length === 0){
+
+    container.innerHTML = `
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          👥
+        </div>
+
+        <div>
+          ${
+            search
+            ? "Ничего не найдено"
+            : "Должников пока нет"
+          }
+        </div>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    people
+      .map(
+        person => {
+
+          const overdue =
+            isOverdue(person) &&
+            Number(person.debt) > 0;
+
+
+          return `
+
+      <div
+        class="person-card
+        ${overdue ? "overdue" : ""}"
+      >
+
+        <div
+          class="person-top"
+          onclick="
+            openPersonDetail('${person.id}')
+          "
+          style="cursor:pointer;"
+        >
+
+          <div class="avatar">
+            ${getInitials(person.name)}
+          </div>
+
+
+          <div class="person-info">
+
+            <div class="person-name">
+              ${escapeHTML(person.name)}
+            </div>
+
+
+            ${
+              person.phone
+              ? `
+                <div class="person-phone">
+                  📞 ${escapeHTML(person.phone)}
+                </div>
+              `
+              : ""
+            }
+
+
+            ${
+              person.note
+              ? `
+                <div class="person-note">
+                  📝 ${escapeHTML(person.note)}
+                </div>
+              `
+              : ""
+            }
+
+          </div>
+
+
+          <div class="person-debt">
+
+            <div class="debt-label">
+              Долг
+            </div>
+
+            <div class="debt-value">
+              ${formatMoney(person.debt)}
+            </div>
+
+          </div>
+
+        </div>
+
+
+        ${
+          overdue
+          ? `
+            <div class="overdue-label">
+              ⚠️ Срок возврата истёк
+            </div>
+          `
+          : ""
+        }
+
+
+        <div class="person-actions">
+
+          <button
+            class="pay-btn"
+            onclick="
+              openPaymentModal('${person.id}')
+            "
+          >
+            💵 Оплата
+          </button>
+
+
+          <button
+            class="edit-btn"
+            onclick="
+              editPerson('${person.id}')
+            "
+          >
+            ✏️ Изменить
+          </button>
+
+
+          <button
+            class="danger-btn"
+            onclick="
+              deletePerson('${person.id}')
+            "
+          >
+            🗑 Удалить
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+/* =========================================
+   DEBTS
+========================================= */
+
+function renderDebts(){
+
+  const totalDebt =
+    data.people.reduce(
+      (sum,p) =>
+        sum +
+        Number(p.debt || 0),
+      0
+    );
+
+
+  const totalPaid =
+    data.people.reduce(
+      (sum,p) => {
+
+        const payments =
+          Array.isArray(p.payments)
+          ? p.payments
+          : [];
+
+
+        return sum +
+          payments.reduce(
+            (s,payment) =>
+              s +
+              Number(
+                payment.amount || 0
+              ),
+            0
+          );
+
+      },
+      0
+    );
+
+
+  const overdue =
+    data.people.filter(
+      p =>
+        isOverdue(p) &&
+        Number(p.debt) > 0
+    ).length;
+
+
+  document.getElementById(
+    "totalDebt"
+  ).textContent =
+    formatMoney(totalDebt);
+
+
+  document.getElementById(
+    "totalPeople"
+  ).textContent =
+    data.people.length;
+
+
+  document.getElementById(
+    "totalPaid"
+  ).textContent =
+    formatMoney(totalPaid);
+
+
+  document.getElementById(
+    "overdueCount"
+  ).textContent =
+    overdue;
+
+
+  const recent =
+    document.getElementById(
+      "recentPeople"
+    );
+
+
+  if(data.people.length === 0){
+
+    recent.innerHTML = `
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          💰
+        </div>
+
+        <div>
+          Должников пока нет
+        </div>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  recent.innerHTML =
+    data.people
+      .slice(0,5)
+      .map(
+        person => `
+
+      <div
+        class="person-card"
+        onclick="
+          openPersonDetail('${person.id}')
+        "
+        style="cursor:pointer;"
+      >
+
+        <div class="person-top">
+
+          <div class="avatar">
+            ${getInitials(person.name)}
+          </div>
+
+
+          <div class="person-info">
+
+            <div class="person-name">
+              ${escapeHTML(person.name)}
+            </div>
+
+
+            <div class="person-note">
+
+              ${
+                person.phone
+                ? "📞 " +
+                  escapeHTML(person.phone)
+                : "Без телефона"
+              }
+
+            </div>
+
+          </div>
+
+
+          <div class="person-debt">
+
+            <div class="debt-label">
+              Долг
+            </div>
+
+            <div class="debt-value">
+              ${formatMoney(person.debt)}
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `
+      )
+      .join("");
+
+}
+
+
+/* =========================================
+   SUPPLIERS
+========================================= */
+
+function openSupplierModal(){
+
+  document.getElementById(
+    "supplierName"
+  ).value = "";
+
+
+  document.getElementById(
+    "supplierPhone"
+  ).value = "";
+
+
+  document.getElementById(
+    "supplierProduct"
+  ).value = "";
+
+
+  document.getElementById(
+    "supplierAmount"
+  ).value = "";
+
+
+  document.getElementById(
+    "supplierNote"
+  ).value = "";
+
+
+  openModal(
+    "supplierModal"
+  );
+
+}
+
+
+function saveSupplier(){
+
+  const name =
+    document
+      .getElementById("supplierName")
+      .value
+      .trim();
+
+
+  const phone =
+    document
+      .getElementById("supplierPhone")
+      .value
+      .trim();
+
+
+  const product =
+    document
+      .getElementById("supplierProduct")
+      .value
+      .trim();
+
+
+  const amount =
+    Number(
+      document
+        .getElementById("supplierAmount")
+        .value
+    ) || 0;
+
+
+  const note =
+    document
+      .getElementById("supplierNote")
+      .value
+      .trim();
+
+
+  if(!name){
+
+    showToast(
+      "Введите название"
+    );
+
+    return;
+
+  }
+
+
+  data.suppliers.unshift({
+
+    id:Date.now(),
+
+    name,
+
+    phone,
+
+    product,
+
+    amount,
+
+    note,
+
+    createdAt:dateNow()
+
+  });
+
+
+  addHistory(
+    "Добавлен поставщик",
+    name
+  );
+
+
+  saveData();
+
+  closeModal(
+    "supplierModal"
+  );
+
+  renderSuppliers();
+
+
+  showToast(
+    "Поставщик добавлен"
+  );
+
+}
+
+
+function renderSuppliers(){
+
+  const container =
+    document.getElementById(
+      "suppliersList"
+    );
+
+
+  if(!container){
+    return;
+  }
+
+
+  if(data.suppliers.length === 0){
+
+    container.innerHTML =
+      emptyHTML(
+        "🚚",
+        "Поставщиков пока нет"
+      );
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    data.suppliers
+      .map(
+        supplier => `
+
+      <div class="list-item">
+
+        <div class="list-icon">
+          🚚
+        </div>
+
+
+        <div class="list-info">
+
+          <div class="list-title">
+            ${escapeHTML(supplier.name)}
+          </div>
+
+
+          <div class="list-sub">
+
+            ${
+              supplier.phone
+              ? "📞 " +
+                escapeHTML(
+                  supplier.phone
+                )
+              : ""
+            }
+
+          </div>
+
+
+          <div class="list-sub">
+
+            ${
+              supplier.product
+              ? "📦 " +
+                escapeHTML(
+                  supplier.product
+                )
+              : ""
+            }
+
+          </div>
+
+        </div>
+
+
+        <div style="font-weight:900;">
+          ${formatMoney(supplier.amount)}
+        </div>
+
+      </div>
+
+    `
+      )
+      .join("");
+
+}
+
+
+/* =========================================
+   NOTES
+========================================= */
+
+function openNoteModal(){
+
+  document.getElementById(
+    "noteTitle"
+  ).value = "";
+
+
+  document.getElementById(
+    "noteText"
+  ).value = "";
+
+
+  openModal(
+    "noteModal"
+  );
+
+}
+
+
+function saveNote(){
+
+  const title =
+    document
+      .getElementById("noteTitle")
+      .value
+      .trim();
+
+
+  const text =
+    document
+      .getElementById("noteText")
+      .value
+      .trim();
+
+
+  if(!title && !text){
+
+    showToast(
+      "Введите заметку"
+    );
+
+    return;
+
+  }
+
+
+  data.notes.unshift({
+
+    id:Date.now(),
+
+    title:
+      title || "Без названия",
+
+    text,
+
+    createdAt:dateNow()
+
+  });
+
+
+  saveData();
+
+  closeModal(
+    "noteModal"
+  );
+
+  renderNotes();
+
+
+  showToast(
+    "Заметка сохранена"
+  );
+
+}
+
+
+function renderNotes(){
+
+  const container =
+    document.getElementById(
+      "notesList"
+    );
+
+
+  if(!container){
+    return;
+  }
+
+
+  if(data.notes.length === 0){
+
+    container.innerHTML =
+      emptyHTML(
+        "📝",
+        "Заметок пока нет"
+      );
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    data.notes
+      .map(
+        note => `
+
+      <div class="list-item">
+
+        <div class="list-icon">
+          📝
+        </div>
+
+
+        <div class="list-info">
+
+          <div class="list-title">
+            ${escapeHTML(note.title)}
+          </div>
+
+
+          <div class="list-sub">
+            ${escapeHTML(note.text)}
+          </div>
+
+
+          <div class="list-sub">
+            ${formatDate(note.createdAt)}
+          </div>
+
+        </div>
+
+      </div>
+
+    `
+      )
+      .join("");
+
+}
+
+
+/* =========================================
+   MONEY
+========================================= */
+
+function openMoneyModal(type){
+
+  currentMoneyType = type;
+
+
+  document.getElementById(
+    "moneyAmount"
+  ).value = "";
+
+
+  document.getElementById(
+    "moneyNote"
+  ).value = "";
+
+
+  document.getElementById(
+    "moneyModalTitle"
+  ).textContent =
+    type === "income"
+    ? "Добавить доход"
+    : "Добавить расход";
+
+
+  openModal(
+    "moneyModal"
+  );
+
+}
+
+
+function saveMoney(){
+
+  const amount =
+    Number(
+      document
+        .getElementById("moneyAmount")
+        .value
+    ) || 0;
+
+
+  const note =
+    document
+      .getElementById("moneyNote")
+      .value
+      .trim();
+
+
+  if(amount <= 0){
+
+    showToast(
+      "Введите сумму"
+    );
+
+    return;
+
+  }
+
+
+  data[currentMoneyType].unshift({
+
+    id:Date.now(),
+
+    amount,
+
+    note,
+
+    createdAt:dateNow()
+
+  });
+
+
+  addHistory(
+
+    currentMoneyType === "income"
+      ? "Добавлен доход"
+      : "Добавлен расход",
+
+    formatMoney(amount)
+
+  );
+
+
+  saveData();
+
+  closeModal(
+    "moneyModal"
+  );
+
+  renderMoneyLists();
+
+
+  showToast(
+    "Сохранено"
+  );
+
+}
+
+
+function renderMoneyLists(){
+
+  const income =
+    document.getElementById(
+      "incomeList"
+    );
+
+
+  const expenses =
+    document.getElementById(
+      "expensesList"
+    );
+
+
+  if(income){
+
+    income.innerHTML =
+      data.income.length
+
+      ?
+
+      data.income
+        .map(
+          item => `
+
+        <div class="list-item">
+
+          <div class="list-icon">
+            📈
+          </div>
+
+
+          <div class="list-info">
+
+            <div class="list-title">
+              +${formatMoney(item.amount)}
+            </div>
+
+
+            <div class="list-sub">
+              ${escapeHTML(
+                item.note ||
+                "Доход"
+              )}
+            </div>
+
+
+            <div class="list-sub">
+              ${formatDate(
+                item.createdAt
+              )}
+            </div>
+
+          </div>
+
+        </div>
+
+      `
+        )
+        .join("")
+
+      :
+
+      emptyHTML(
+        "📈",
+        "Доходов пока нет"
+      );
+
+  }
+
+
+  if(expenses){
+
+    expenses.innerHTML =
+      data.expenses.length
+
+      ?
+
+      data.expenses
+        .map(
+          item => `
+
+        <div class="list-item">
+
+          <div class="list-icon">
+            📉
+          </div>
+
+
+          <div class="list-info">
+
+            <div class="list-title">
+              -${formatMoney(item.amount)}
+            </div>
+
+
+            <div class="list-sub">
+              ${escapeHTML(
+                item.note ||
+                "Расход"
+              )}
+            </div>
+
+
+            <div class="list-sub">
+              ${formatDate(
+                item.createdAt
+              )}
+            </div>
+
+          </div>
+
+        </div>
+
+      `
+        )
+        .join("")
+
+      :
+
+      emptyHTML(
+        "📉",
+        "Расходов пока нет"
+      );
+
+  }
+
+}
+
+
+/* =========================================
+   SHOPPING
+========================================= */
+
+function addShopping(){
+
+  const item =
+    prompt(
+      "Что нужно купить?"
+    );
+
+
+  if(!item){
+    return;
+  }
+
+
+  data.shopping.unshift({
+
+    id:Date.now(),
+
+    text:item,
+
+    done:false,
+
+    createdAt:dateNow()
+
+  });
+
+
+  saveData();
+
+  renderShopping();
+
+
+  showToast(
+    "Добавлено"
+  );
+
+}
+
+
+function toggleShopping(id){
+
+  const item =
+    data.shopping.find(
+      x =>
+        String(x.id) ===
+        String(id)
+    );
+
+
+  if(!item){
+    return;
+  }
+
+
+  item.done =
+    !item.done;
+
+
+  saveData();
+
+  renderShopping();
+
+}
+
+
+function renderShopping(){
+
+  const container =
+    document.getElementById(
+      "shoppingList"
+    );
+
+
+  if(!container){
+    return;
+  }
+
+
+  container.innerHTML =
+    data.shopping.length
+
+    ?
+
+    data.shopping
+      .map(
+        item => `
+
+      <div
+        class="list-item"
+        onclick="
+          toggleShopping('${item.id}')
+        "
+      >
+
+        <div class="list-icon">
+          ${item.done ? "✅" : "🛒"}
+        </div>
+
+
+        <div class="list-info">
+
+          <div
+            class="list-title"
+            style="
+              ${
+                item.done
+                ? "text-decoration:line-through;opacity:.5;"
+                : ""
+              }
+            "
+          >
+            ${escapeHTML(item.text)}
+          </div>
+
+        </div>
+
+      </div>
+
+    `
+      )
+      .join("")
+
+    :
+
+    emptyHTML(
+      "🛒",
+      "Список покупок пуст"
+    );
+
+}
+
+
+/* =========================================
+   REMINDERS
+========================================= */
+
+function addReminder(){
+
+  const text =
+    prompt(
+      "О чём напомнить?"
+    );
+
+
+  if(!text){
+    return;
+  }
+
+
+  data.reminders.unshift({
+
+    id:Date.now(),
+
+    text,
+
+    createdAt:dateNow()
+
+  });
+
+
+  saveData();
+
+  renderReminders();
+
+
+  showToast(
+    "Напоминание добавлено"
+  );
+
+}
+
+
+function renderReminders(){
+
+  const container =
+    document.getElementById(
+      "remindersList"
+    );
+
+
+  if(!container){
+    return;
+  }
+
+
+  container.innerHTML =
+    data.reminders.length
+
+    ?
+
+    data.reminders
+      .map(
+        item => `
+
+      <div class="list-item">
+
+        <div class="list-icon">
+          🔔
+        </div>
+
+
+        <div class="list-info">
+
+          <div class="list-title">
+            ${escapeHTML(item.text)}
+          </div>
+
+
+          <div class="list-sub">
+            ${formatDate(item.createdAt)}
+          </div>
+
+        </div>
+
+      </div>
+
+    `
+      )
+      .join("")
+
+    :
+
+    emptyHTML(
+      "🔔",
+      "Напоминаний пока нет"
+    );
+
+}
+
+
+/* =========================================
+   STATISTICS
+========================================= */
+
+function renderStatistics(){
+
+  const totalDebt =
+    data.people.reduce(
+      (s,p) =>
+        s +
+        Number(p.debt || 0),
+      0
+    );
+
+
+  const paid =
+    data.people.reduce(
+      (s,p) =>
+        s +
+        (p.payments || [])
+          .reduce(
+            (x,y) =>
+              x +
+              Number(
+                y.amount || 0
+              ),
+            0
+          ),
+      0
+    );
+
+
+  const income =
+    data.income.reduce(
+      (s,x) =>
+        s +
+        Number(x.amount || 0),
+      0
+    );
+
+
+  const expenses =
+    data.expenses.reduce(
+      (s,x) =>
+        s +
+        Number(x.amount || 0),
+      0
+    );
+
+
+  const overdue =
+    data.people.filter(
+      p =>
+        isOverdue(p) &&
+        Number(p.debt) > 0
+    ).length;
+
+
+  document.getElementById(
+    "statisticsContent"
+  ).innerHTML = `
+
+    <div class="summary-grid">
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          👥
+        </div>
+
+        <div class="summary-label">
+          Людей
+        </div>
+
+        <div class="summary-value">
+          ${data.people.length}
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          💰
+        </div>
+
+        <div class="summary-label">
+          Долги
+        </div>
+
+        <div class="summary-value green-text">
+          ${formatMoney(totalDebt)}
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          💵
+        </div>
+
+        <div class="summary-label">
+          Получено
+        </div>
+
+        <div class="summary-value">
+          ${formatMoney(paid)}
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          ⚠️
+        </div>
+
+        <div class="summary-label">
+          Просрочено
+        </div>
+
+        <div class="summary-value red-text">
+          ${overdue}
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          📈
+        </div>
+
+        <div class="summary-label">
+          Доходы
+        </div>
+
+        <div class="summary-value green-text">
+          ${formatMoney(income)}
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          📉
+        </div>
+
+        <div class="summary-label">
+          Расходы
+        </div>
+
+        <div class="summary-value red-text">
+          ${formatMoney(expenses)}
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================
+   GLOBAL SEARCH
+========================================= */
+
+function globalSearch(){
+
+  const query =
+    document
+      .getElementById(
+        "globalSearch"
+      )
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const container =
+    document.getElementById(
+      "searchResults"
+    );
+
+
+  if(!query){
+
+    container.innerHTML = `
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          🔍
+        </div>
+
+        Начните вводить текст
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const people =
+    data.people.filter(
+      p =>
+        String(
+          p.name || ""
+        )
+          .toLowerCase()
+          .includes(query)
+
+        ||
+
+        String(
+          p.phone || ""
+        )
+          .toLowerCase()
+          .includes(query)
+
+        ||
+
+        String(
+          p.note || ""
+        )
+          .toLowerCase()
+          .includes(query)
+    );
+
+
+  const suppliers =
+    data.suppliers.filter(
+      s =>
+        String(
+          s.name || ""
+        )
+          .toLowerCase()
+          .includes(query)
+
+        ||
+
+        String(
+          s.phone || ""
+        )
+          .toLowerCase()
+          .includes(query)
+
+        ||
+
+        String(
+          s.product || ""
+        )
+          .toLowerCase()
+          .includes(query)
+    );
+
+
+  const notes =
+    data.notes.filter(
+      n =>
+        String(
+          n.title || ""
+        )
+          .toLowerCase()
+          .includes(query)
+
+        ||
+
+        String(
+          n.text || ""
+        )
+          .toLowerCase()
+          .includes(query)
+    );
+
+
+  let html = "";
+
+
+  if(people.length){
+
+    html += `
+
+      <div
+        style="
+          font-size:17px;
+          font-weight:900;
+          margin:15px 0 9px;
+        "
+      >
+        👥 Люди
+      </div>
+
+    `;
+
+
+    html +=
+      people
+        .map(
+          person => `
+
+        <div
+          class="person-card"
+          onclick="
+            openPersonDetail('${person.id}')
+          "
+        >
+
+          <div class="person-top">
+
+            <div class="avatar">
+              ${getInitials(person.name)}
+            </div>
+
+
+            <div class="person-info">
+
+              <div class="person-name">
+                ${escapeHTML(person.name)}
+              </div>
+
+
+              <div class="person-phone">
+
+                ${
+                  person.phone
+                  ? "📞 " +
+                    escapeHTML(
+                      person.phone
+                    )
+                  : ""
+                }
+
+              </div>
+
+            </div>
+
+
+            <div class="debt-value">
+              ${formatMoney(person.debt)}
+            </div>
+
+          </div>
+
+        </div>
+
+      `
+        )
+        .join("");
+
+  }
+
+
+  if(suppliers.length){
+
+    html += `
+
+      <div
+        style="
+          font-size:17px;
+          font-weight:900;
+          margin:15px 0 9px;
+        "
+      >
+        🚚 Поставщики
+      </div>
+
+    `;
+
+
+    html +=
+      suppliers
+        .map(
+          supplier => `
+
+        <div class="list-item">
+
+          <div class="list-icon">
+            🚚
+          </div>
+
+
+          <div class="list-info">
+
+            <div class="list-title">
+              ${escapeHTML(supplier.name)}
+            </div>
+
+
+            <div class="list-sub">
+              ${escapeHTML(
+                supplier.product || ""
+              )}
+            </div>
+
+          </div>
+
+        </div>
+
+      `
+        )
+        .join("");
+
+  }
+
+
+  if(notes.length){
+
+    html += `
+
+      <div
+        style="
+          font-size:17px;
+          font-weight:900;
+          margin:15px 0 9px;
+        "
+      >
+        📝 Заметки
+      </div>
+
+    `;
+
+
+    html +=
+      notes
+        .map(
+          note => `
+
+        <div class="list-item">
+
+          <div class="list-icon">
+            📝
+          </div>
+
+
+          <div class="list-info">
+
+            <div class="list-title">
+              ${escapeHTML(note.title)}
+            </div>
+
+
+            <div class="list-sub">
+              ${escapeHTML(note.text)}
+            </div>
+
+          </div>
+
+        </div>
+
+      `
+        )
+        .join("");
+
+  }
+
+
+  if(!html){
+
+    html = `
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          🔍
+        </div>
+
+        Ничего не найдено
+
+      </div>
+
+    `;
+
+  }
+
+
+  container.innerHTML = html;
+
+}
+
+
+/* =========================================
+   HISTORY
+========================================= */
+
+function addHistory(
+  title,
+  description
+){
+
+  data.history.unshift({
+
+    id:
+      Date.now() +
+      Math.random(),
+
+    title,
+
+    description,
+
+    date:dateNow()
+
+  });
+
+
+  if(data.history.length > 300){
+
+    data.history =
+      data.history.slice(
+        0,
+        300
+      );
+
+  }
+
+}
+
+
+function renderHistory(){
+
+  const container =
+    document.getElementById(
+      "historyList"
+    );
+
+
+  if(!container){
+    return;
+  }
+
+
+  if(data.history.length === 0){
+
+    container.innerHTML =
+      emptyHTML(
+        "📜",
+        "История пока пуст"
+      );
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    data.history
+      .map(
+        item => `
+
+      <div class="history-item">
+
+        <div class="history-title">
+          ${escapeHTML(item.title)}
+        </div>
+
+
+        <div style="margin-top:4px;">
+          ${escapeHTML(
+            item.description || ""
+          )}
+        </div>
+
+
+        <div class="history-date">
+          ${formatDate(item.date)}
+        </div>
+
+      </div>
+
+    `
+      )
+      .join("");
+
+}
+
+
+/* =========================================
+   BACKUP
+========================================= */
+
+function exportBackup(){
+
+  const backup = {
+
+    app:
+      "SHOHIN DAFTAR",
+
+    version:
+      2,
+
+    exportedAt:
+      new Date().toISOString(),
+
+    data
+
+  };
+
+
+  const blob =
+    new Blob(
+      [
+        JSON.stringify(
+          backup,
+          null,
+          2
+        )
+      ],
+      {
+        type:
+          "application/json"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(blob);
+
+
+  const a =
+    document.createElement(
+      "a"
+    );
+
+
+  a.href = url;
+
+
+  a.download =
+    "SHOHIN-DAFTAR-backup-" +
+    new Date()
+      .toISOString()
+      .slice(0,10) +
+    ".json";
+
+
+  document
+    .body
+    .appendChild(a);
+
+
+  a.click();
+
+  a.remove();
+
+
+  URL.revokeObjectURL(url);
+
+
+  showToast(
+    "Backup создан"
+  );
+
+}
+
+
+function importBackup(event){
+
+  const file =
+    event.target.files[0];
+
+
+  if(!file){
+    return;
+  }
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload =
+    function(e){
+
+      try{
+
+        const imported =
+          JSON.parse(
+            e.target.result
+          );
+
+
+        const importedData =
+          imported.data ||
+          imported;
+
+
+        if(!importedData.people){
+
+          throw new Error(
+            "Неверный backup"
+          );
+
+        }
+
+
+        const ok =
+          confirm(
+            "Восстановить данные из backup?\n\nТекущие данные будут заменены."
+          );
+
+
+        if(!ok){
+          return;
+        }
+
+
+        data = {
+
+          people:
+            Array.isArray(
+              importedData.people
+            )
+            ? importedData.people
+            : [],
+
+
+          suppliers:
+            Array.isArray(
+              importedData.suppliers
+            )
+            ? importedData.suppliers
+            : [],
+
+
+          notes:
+            Array.isArray(
+              importedData.notes
+            )
+            ? importedData.notes
+            : [],
+
+
+          income:
+            Array.isArray(
+              importedData.income
+            )
+            ? importedData.income
+            : [],
+
+
+          expenses:
+            Array.isArray(
+              importedData.expenses
+            )
+            ? importedData.expenses
+            : [],
+
+
+          shopping:
+            Array.isArray(
+              importedData.shopping
+            )
+            ? importedData.shopping
+            : [],
+
+
+          reminders:
+            Array.isArray(
+              importedData.reminders
+            )
+            ? importedData.reminders
+            : [],
+
+
+          history:
+            Array.isArray(
+              importedData.history
+            )
+            ? importedData.history
+            : []
+
+        };
+
+
+        data.people.forEach(
+          person => {
+
+            if(!person.phone){
+              person.phone = "";
+            }
+
+            if(!Array.isArray(person.payments)){
+              person.payments = [];
+            }
+
+            if(!person.dueDate){
+              person.dueDate = "";
+            }
+
+          }
+        );
+
+
+        saveData();
+
+        renderAll();
+
+
+        showToast(
+          "Данные восстановлены"
+        );
+
+
+      }catch(error){
+
+        console.error(error);
+
+        showToast(
+          "Неверный файл backup"
+        );
+
+      }
+
+    };
+
+
+  reader.readAsText(file);
+
+  event.target.value = "";
+
+}
+
+
+/* =========================================
+   CLEAR
+========================================= */
+
+function clearAllData(){
+
+  const ok =
+    confirm(
+      "ВНИМАНИЕ!\n\nУдалить ВСЕ данные SHOHIN DAFTAR?\n\nЭто действие нельзя отменить."
+    );
+
+
+  if(!ok){
+    return;
+  }
+
+
+  localStorage.removeItem(
+    STORAGE_KEY
+  );
+
+
+  data = {
+
+    people:[],
+
+    suppliers:[],
+
+    notes:[],
+
+    income:[],
+
+    expenses:[],
+
+    shopping:[],
+
+    reminders:[],
+
+    history:[]
+
+  };
+
+
+  renderAll();
+
+
+  showToast(
+    "Все данные удалены"
+  );
+
+}
+
+
+/* =========================================
+   SCANNER
+========================================= */
+
+function scanImage(){
+
+  const input =
+    document.getElementById(
+      "scannerInput"
+    );
+
+
+  const result =
+    document.getElementById(
+      "scannerResult"
+    );
+
+
+  if(!input.files.length){
+
+    result.textContent =
+      "Сначала выберите или сфотографируйте изображение.";
+
+    return;
+
+  }
+
+
+  result.innerHTML = `
+
+    <div class="card">
+
+      📷 Фото загружено.
+
+      <br><br>
+
+      Распознавание текста можно подключить следующим этапом.
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================
+   RENDER ALL
+========================================= */
+
+function renderAll(){
+
+  renderDebts();
+
+  renderPeople();
+
+  renderSuppliers();
+
+  renderNotes();
+
+  renderMoneyLists();
+
+  renderShopping();
+
+  renderReminders();
+
+  renderStatistics();
+
+  renderHistory();
+
+}
+
+
+/* =========================================
+   HELPERS
+========================================= */
+
+function dateNow(){
+
+  return new Date().toISOString();
+
+}
+
+
+function formatMoney(value){
+
+  const number =
+    Number(value) || 0;
+
+
+  return number.toLocaleString(
+    "ru-RU",
+    {
+      maximumFractionDigits:2
+    }
+  );
+
+}
+
+
+function formatDate(value){
+
+  if(!value){
+    return "";
+  }
+
+
+  const date =
+    new Date(value);
+
+
+  if(
+    isNaN(
+      date.getTime()
+    )
+  ){
+
+    return value;
+
+  }
+
+
+  return date.toLocaleString(
+    "ru-RU",
+    {
+      day:"2-digit",
+      month:"2-digit",
+      year:"numeric",
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
+
+}
+
+
+function formatDateOnly(value){
+
+  if(!value){
+    return "";
+  }
+
+
+  const date =
+    new Date(
+      value +
+      "T00:00:00"
+    );
+
+
+  if(
+    isNaN(
+      date.getTime()
+    )
+  ){
+
+    return value;
+
+  }
+
+
+  return date.toLocaleDateString(
+    "ru-RU",
+    {
+      day:"2-digit",
+      month:"2-digit",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+function isOverdue(person){
+
+  if(!person.dueDate){
+    return false;
+  }
+
+
+  const due =
+    new Date(
+      person.dueDate +
+      "T23:59:59"
+    );
+
+
+  return new Date() > due;
+
+}
+
+
+function getInitials(name){
+
+  if(!name){
+    return "SH";
+  }
+
+
+  const words =
+    String(name)
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+
+
+  if(words.length === 1){
+
+    return words[0]
+      .substring(0,2)
+      .toUpperCase();
+
+  }
+
+
+  return (
+    words[0][0] +
+    words[1][0]
+  ).toUpperCase();
+
+}
+
+
+function escapeHTML(value){
+
+  return String(
+    value ?? ""
+  )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+function emptyHTML(
+  icon,
+  text
+){
+
+  return `
+
+    <div class="empty">
+
+      <div class="empty-icon">
+        ${icon}
+      </div>
+
+      <div>
+        ${text}
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+function showToast(message){
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+
+  toast.textContent =
+    message;
+
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    window.toastTimer
+  );
+
+
+  window.toastTimer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      2500
+    );
+
+}
+
+
+/* =========================================
+   CLOSE MODALS
+========================================= */
+
+document
+  .querySelectorAll(".modal")
+  .forEach(
+    modal => {
+
+      modal.addEventListener(
+        "click",
+        event => {
+
+          if(
+            event.target ===
+            modal
+          ){
+
+            modal.classList.remove(
+              "active"
+            );
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================================
+   ESCAPE
+========================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Escape"){
+
+      document
+        .querySelectorAll(
+          ".modal.active"
+        )
+        .forEach(
+          modal => {
+
+            modal.classList.remove(
+              "active"
+            );
+
+          }
+        );
+
+
+      closeDrawer();
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>
