@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!-- SHOHIN BRAND COLORS — НЕ МЕНЯТЬ -->
+
+    <color name="shohin_green">#08A56C</color>
+    <color name="shohin_dark">#071C16</color>
+    <color name="shohin_green_dark">#087B53</color>
+    <color name="shohin_lime">#BAF05B</color>
+
+</resources>
