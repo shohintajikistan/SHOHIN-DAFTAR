@@ -1,6 +1,5 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -10,9 +9,13 @@ android {
 
     defaultConfig {
         applicationId = "tj.shohin.daftar"
+
         minSdk = 23
+
         targetSdk = 36
+
         versionCode = 1
+
         versionName = "1.0"
     }
 
@@ -37,10 +40,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = "17"
     }
 }
 
